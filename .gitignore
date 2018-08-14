@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+
+# IDE files
+*.project
+*.workspace
+.codelite/
+
+build/
+html/
