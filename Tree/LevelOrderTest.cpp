@@ -1,12 +1,12 @@
 #include "gtest/gtest.h"
 
-#include "Tree.hpp"
+#include "BinaryNode.hpp"
 #include "LevelOrder.hpp"
 #include "PrettyPrint.hpp"
 
 TEST(LevelOrder, Test)
 {
-    using NodeType = Node<int>;
+    using NodeType = BinaryNode<int>;
     auto root                  = NodeType::Create(20);
     root->left                 = NodeType::Create(8);
     root->left->left           = NodeType::Create(4);
@@ -19,7 +19,7 @@ TEST(LevelOrder, Test)
     PrintPretty<NodeType>(root, 1, 0, std::cout);
 
     std::list<typename NodeType::Ptr> nodes;
-    GetLevelOrder<NodeType>(root, nodes);
+    GetLevelOrderRecursive<NodeType>(root, nodes);
     std::cout << std::endl << "Level Order: " << std::endl;
     for (auto node : nodes)
     {
@@ -27,4 +27,12 @@ TEST(LevelOrder, Test)
     }
     std::cout << std::endl;
 
+    nodes.clear();
+    GetLevelOrderIterative<NodeType>(root, nodes);
+    std::cout << std::endl << "Level Order Iterative: " << std::endl;
+    for (auto node : nodes)
+    {
+        std::cout << node->data << " ";
+    }
+    std::cout << std::endl;
 }

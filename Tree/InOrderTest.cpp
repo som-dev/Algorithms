@@ -1,12 +1,12 @@
 #include "gtest/gtest.h"
 
-#include "Tree.hpp"
+#include "BinaryNode.hpp"
 #include "InOrder.hpp"
 #include "PrettyPrint.hpp"
 
 TEST(InOrder, Test)
 {
-    using NodeType = Node<int>;
+    using NodeType = BinaryNode<int>;
     auto root                  = NodeType::Create(20);
     root->left                 = NodeType::Create(8);
     root->left->left           = NodeType::Create(4);

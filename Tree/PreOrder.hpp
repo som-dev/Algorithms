@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Tree.hpp"
 #include <list>
 
 template <typename NodeType>
