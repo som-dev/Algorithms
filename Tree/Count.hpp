@@ -1,5 +1,8 @@
 #pragma once
 
+namespace Tree
+{
+
 template <typename NodeType>
 size_t CalculateCount(const typename NodeType::Ptr& node)
 {
@@ -8,4 +11,6 @@ size_t CalculateCount(const typename NodeType::Ptr& node)
         return 0;
     }
     return 1 + CalculateCount<NodeType>(node->left) + CalculateCount<NodeType>(node->right);
+}
+
 }

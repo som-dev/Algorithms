@@ -3,11 +3,13 @@
 #include "SinglyLinkedNode.hpp"
 #include "ReverseEveryK.hpp"
 #include "Print.hpp"
-#include <list>
 
-TEST(ReverseEveryK, Test)
+namespace {
+
+using NodeType = LinkedList::SinglyLinkedNode<int>;
+
+NodeType::Ptr CreateList()
 {
-    using NodeType = SinglyLinkedNode<int>;
     auto head                                       = NodeType::Create(20);
     head->next                                      = NodeType::Create(8);
     head->next->next                                = NodeType::Create(4);
@@ -16,23 +18,37 @@ TEST(ReverseEveryK, Test)
     head->next->next->next->next->next              = NodeType::Create(14);
     head->next->next->next->next->next->next        = NodeType::Create(22);
     head->next->next->next->next->next->next->next  = NodeType::Create(25);
+    return head;
+}
 
-    Print<NodeType>(head, std::cout);
+void VerifyListReverseEvery3(const NodeType::Ptr& head)
+{
+    EXPECT_EQ(head->data,                                           4);
+    EXPECT_EQ(head->next->data,                                     8);
+    EXPECT_EQ(head->next->next->data,                               20);
+    EXPECT_EQ(head->next->next->next->data,                         14);
+    EXPECT_EQ(head->next->next->next->next->data,                   10);
+    EXPECT_EQ(head->next->next->next->next->next->data,             12);
+    EXPECT_EQ(head->next->next->next->next->next->next->data,       25);
+    EXPECT_EQ(head->next->next->next->next->next->next->next->data, 22);
+}
 
-    std::list<typename NodeType::Ptr> nodes;
-    ReverseEveryKWithStorage<NodeType>(head, 3, nodes);
-    std::cout << std::endl << "Reverse Every K With Storage: " << std::endl;
-    for (auto node : nodes)
-    {
-        std::cout << node->data << " ";
-    }
-    std::cout << std::endl;
+TEST(LinkedList, ReverseEveryKInPlaceWithStorage)
+{
+    auto head = CreateList();
+    LinkedList::Print<NodeType>("Original List:", head, std::cout);
+    LinkedList::ReverseEveryKInPlaceWithStorage<NodeType>(head, 3);
+    LinkedList::Print<NodeType>("Reverse Every K With Storage In Place:", head, std::cout);
+    VerifyListReverseEvery3(head);
+}
 
-    ReverseEveryKWithStorageInPlace<NodeType>(head, 3);
-    std::cout << std::endl << "Reverse Every K With Storage In Place: " << std::endl;
-    Print<NodeType>(head, std::cout);
+TEST(LinkedList, ReverseEveryKInPlace)
+{
+    auto head = CreateList();
+    LinkedList::Print<NodeType>("Original List:", head, std::cout);
+    head = LinkedList::ReverseEveryKInPlace<NodeType>(head, 3);
+    LinkedList::Print<NodeType>("Reverse Every K In Place:", head, std::cout);
+    VerifyListReverseEvery3(head);
+}
 
-    head = ReverseEveryKInPlace<NodeType>(head, 3);
-    std::cout << std::endl << "Reverse Every K In Place: " << std::endl;
-    Print<NodeType>(head, std::cout);
 }

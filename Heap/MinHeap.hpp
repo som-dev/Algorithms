@@ -4,6 +4,9 @@
 #include <vector>
 #include <stdexcept>
 
+namespace Heap
+{
+
 template <typename T>
 class MinHeap
 {
@@ -110,3 +113,5 @@ protected:
 
     std::vector<T> m_items;
 };
+
+}

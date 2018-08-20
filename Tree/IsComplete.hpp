@@ -3,6 +3,9 @@
 #include "Count.hpp"
 #include <queue>
 
+namespace Tree
+{
+
 template <typename NodeType>
 bool IsCompleteHelper(const typename NodeType::Ptr& node, size_t index, size_t count)
 {
@@ -45,4 +48,6 @@ bool IsCompleteIterative(const typename NodeType::Ptr& root)
         else nonFullNodeSeen = true;
     }
     return true;
+}
+
 }

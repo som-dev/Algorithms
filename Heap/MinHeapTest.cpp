@@ -2,9 +2,12 @@
 
 #include "MinHeap.hpp"
 
-TEST(MinHeapTest, Test)
+namespace
 {
-    MinHeap<int> minHeap;
+
+TEST(Heap, MinHeap)
+{
+    Heap::MinHeap<int> minHeap;
 
     minHeap.add(8);
     minHeap.add(-3);
@@ -34,4 +37,6 @@ TEST(MinHeapTest, Test)
     minHeap.removeMin();
     EXPECT_EQ(minHeap.getMin(), 12);
     minHeap.removeMin();
+}
+
 }

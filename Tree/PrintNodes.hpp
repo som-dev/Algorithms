@@ -3,14 +3,14 @@
 #include <string>
 #include <iostream>
 
-namespace LinkedList
+namespace Tree
 {
 
 template <typename NodeType>
-void Print(const std::string& title, const typename NodeType::Ptr& head, std::ostream& out)
+void PrintNodes(const std::string& title, const std::vector<typename NodeType::Ptr>& nodes, std::ostream& out)
 {
     out << title << std::endl;
-    for (auto node = head; node != nullptr; node = node->next)
+    for (auto node : nodes)
     {
         out << node->data << " ";
     }

@@ -2,11 +2,16 @@
 
 #include "BinaryNode.hpp"
 #include "LevelOrder.hpp"
-#include "PrettyPrint.hpp"
+#include "PrintPretty.hpp"
+#include "PrintNodes.hpp"
 
-TEST(LevelOrder, Test)
+namespace
 {
-    using NodeType = BinaryNode<int>;
+
+using NodeType = Tree::BinaryNode<int>;
+
+NodeType::Ptr CreateTree()
+{
     auto root                  = NodeType::Create(20);
     root->left                 = NodeType::Create(8);
     root->left->left           = NodeType::Create(4);
@@ -15,24 +20,40 @@ TEST(LevelOrder, Test)
     root->left->right->right   = NodeType::Create(14);
     root->right                = NodeType::Create(22);
     root->right->right         = NodeType::Create(25);
+    return root;
+}
 
-    PrintPretty<NodeType>(root, 1, 0, std::cout);
+void VerifyLevelOrder(const std::vector<NodeType::Ptr>& nodes)
+{
+    EXPECT_EQ(nodes.size(), 8);
+    EXPECT_EQ(nodes[0]->data, 20);
+    EXPECT_EQ(nodes[1]->data, 8);
+    EXPECT_EQ(nodes[2]->data, 22);
+    EXPECT_EQ(nodes[3]->data, 4);
+    EXPECT_EQ(nodes[4]->data, 12);
+    EXPECT_EQ(nodes[5]->data, 25);
+    EXPECT_EQ(nodes[6]->data, 10);
+    EXPECT_EQ(nodes[7]->data, 14);
+}
 
-    std::list<typename NodeType::Ptr> nodes;
-    GetLevelOrderRecursive<NodeType>(root, nodes);
-    std::cout << std::endl << "Level Order: " << std::endl;
-    for (auto node : nodes)
-    {
-        std::cout << node->data << " ";
-    }
-    std::cout << std::endl;
+TEST(Tree, LevelOrderRecursive)
+{
+    auto root = CreateTree();
+    Tree::PrintPretty<NodeType>("Tree:", root, 1, 0, std::cout);
+    std::vector<typename NodeType::Ptr> nodes;
+    Tree::GetLevelOrderRecursive<NodeType>(root, nodes);
+    Tree::PrintNodes<NodeType>("Level Order Recursive:", nodes, std::cout);
+    VerifyLevelOrder(nodes);
+}
 
-    nodes.clear();
-    GetLevelOrderIterative<NodeType>(root, nodes);
-    std::cout << std::endl << "Level Order Iterative: " << std::endl;
-    for (auto node : nodes)
-    {
-        std::cout << node->data << " ";
-    }
-    std::cout << std::endl;
+TEST(Tree, LevelOrderIterative)
+{
+    auto root = CreateTree();
+    Tree::PrintPretty<NodeType>("Tree:", root, 1, 0, std::cout);
+    std::vector<typename NodeType::Ptr> nodes;
+    Tree::GetLevelOrderIterative<NodeType>(root, nodes);
+    Tree::PrintNodes<NodeType>(" Level Order Iterative:", nodes, std::cout);
+    VerifyLevelOrder(nodes);
+}
+
 }

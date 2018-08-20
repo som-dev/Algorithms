@@ -1,11 +1,14 @@
 #pragma once
 
 #include "Height.hpp"
-#include <list>
+#include <vector>
 #include <queue>
 
+namespace Tree
+{
+
 template <typename NodeType>
-void GetLevel(const typename NodeType::Ptr& node, size_t level, std::list<typename NodeType::Ptr>& nodes)
+void GetLevel(const typename NodeType::Ptr& node, size_t level, std::vector<typename NodeType::Ptr>& nodes)
 {
     if (node == nullptr)
     {
@@ -23,19 +26,19 @@ void GetLevel(const typename NodeType::Ptr& node, size_t level, std::list<typena
 }
 
 template <typename NodeType>
-void GetLevelOrderRecursive(const typename NodeType::Ptr& root, std::list<typename NodeType::Ptr>& nodes)
+void GetLevelOrderRecursive(const typename NodeType::Ptr& root, std::vector<typename NodeType::Ptr>& nodes)
 {
     size_t height = CalculateHeight<NodeType>(root);
     for (size_t i = 1; i <= height; ++i)
     {
-        std::list<typename NodeType::Ptr> levelNodes;
+        std::vector<typename NodeType::Ptr> levelNodes;
         GetLevel<NodeType>(root, i, levelNodes);
-        nodes.splice(nodes.end(), levelNodes);
+        nodes.insert(nodes.end(), levelNodes.begin(), levelNodes.end());
     }
 }
 
 template <typename NodeType>
-void GetLevelOrderIterative(const typename NodeType::Ptr& root, std::list<typename NodeType::Ptr>& nodes)
+void GetLevelOrderIterative(const typename NodeType::Ptr& root, std::vector<typename NodeType::Ptr>& nodes)
 {
     std::queue<typename NodeType::Ptr> queue;
     queue.push(root);
@@ -47,4 +50,6 @@ void GetLevelOrderIterative(const typename NodeType::Ptr& root, std::list<typena
         if (front->right != nullptr) queue.push(front->right);
         queue.pop();
     }
+}
+
 }

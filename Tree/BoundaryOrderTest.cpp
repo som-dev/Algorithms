@@ -2,11 +2,15 @@
 
 #include "BinaryNode.hpp"
 #include "BoundaryOrder.hpp"
-#include "PrettyPrint.hpp"
+#include "PrintPretty.hpp"
+#include "PrintNodes.hpp"
 
-TEST(BoundaryOrder, Test)
+namespace
 {
-    using NodeType = BinaryNode<int>;
+
+TEST(Tree, BoundaryOrder)
+{
+    using NodeType = Tree::BinaryNode<int>;
     auto root                  = NodeType::Create(20);
     root->left                 = NodeType::Create(8);
     root->left->left           = NodeType::Create(4);
@@ -16,14 +20,20 @@ TEST(BoundaryOrder, Test)
     root->right                = NodeType::Create(22);
     root->right->right         = NodeType::Create(25);
 
-    PrintPretty<NodeType>(root, 1, 0, std::cout);
+    Tree::PrintPretty<NodeType>("Tree:", root, 1, 0, std::cout);
 
-    std::list<NodeType::Ptr> nodes;
-    GetBoundaryOrder<NodeType>(root, nodes);
-    std::cout << std::endl << "Boundary Order: " << std::endl;
-    for (auto node : nodes)
-    {
-        std::cout << node->data << " ";
-    }
-    std::cout << std::endl;
+    std::vector<NodeType::Ptr> nodes;
+    Tree::GetBoundaryOrder<NodeType>(root, nodes);
+    Tree::PrintNodes<NodeType>("Boundary Order:", nodes, std::cout);
+
+    EXPECT_EQ(nodes.size(), 7);
+    EXPECT_EQ(nodes[0]->data, 20);
+    EXPECT_EQ(nodes[1]->data, 8);
+    EXPECT_EQ(nodes[2]->data, 4);
+    EXPECT_EQ(nodes[3]->data, 10);
+    EXPECT_EQ(nodes[4]->data, 14);
+    EXPECT_EQ(nodes[5]->data, 25);
+    EXPECT_EQ(nodes[6]->data, 22);
+}
+
 }

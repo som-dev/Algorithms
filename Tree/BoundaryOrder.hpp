@@ -1,9 +1,12 @@
 #pragma once
 
-#include <list>
+#include <vector>
+
+namespace Tree
+{
 
 template <typename NodeType>
-void GetLeftBoundary(const typename NodeType::Ptr& node, std::list<typename NodeType::Ptr>& nodes)
+void GetLeftBoundary(const typename NodeType::Ptr& node, std::vector<typename NodeType::Ptr>& nodes)
 {
     if (node == nullptr) return;
     if (node->left)
@@ -20,7 +23,7 @@ void GetLeftBoundary(const typename NodeType::Ptr& node, std::list<typename Node
 }
 
 template <typename NodeType>
-void GetRightBoundary(const typename NodeType::Ptr& node, std::list<typename NodeType::Ptr>& nodes)
+void GetRightBoundary(const typename NodeType::Ptr& node, std::vector<typename NodeType::Ptr>& nodes)
 {
     if (node == nullptr) return;
     if (node->right)
@@ -37,7 +40,7 @@ void GetRightBoundary(const typename NodeType::Ptr& node, std::list<typename Nod
 }
 
 template <typename NodeType>
-void GetLeaves(const typename NodeType::Ptr& node, std::list<typename NodeType::Ptr>& nodes)
+void GetLeaves(const typename NodeType::Ptr& node, std::vector<typename NodeType::Ptr>& nodes)
 {
     if (node == nullptr) return;
     GetLeaves<NodeType>(node->left, nodes);
@@ -55,11 +58,13 @@ void GetLeaves(const typename NodeType::Ptr& node, std::list<typename NodeType::
 // 3) print the leaves from right
 // 3) print the right boundary (skip root though)
 template <typename NodeType>
-void GetBoundaryOrder(const typename NodeType::Ptr& root, std::list<typename NodeType::Ptr>& nodes)
+void GetBoundaryOrder(const typename NodeType::Ptr& root, std::vector<typename NodeType::Ptr>& nodes)
 {
     nodes.push_back(root);
     GetLeftBoundary<NodeType>(root->left, nodes);
     GetLeaves<NodeType>(root->left, nodes);
     GetLeaves<NodeType>(root->right, nodes);
     GetRightBoundary<NodeType>(root->right, nodes);
+}
+
 }

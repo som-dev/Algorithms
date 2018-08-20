@@ -7,9 +7,13 @@
 #include <cmath>
 #include "Height.hpp"
 
+namespace Tree
+{
+
 // Print the arm branches (eg, /    \ ) on a line
 template <typename NodeType>
-void printBranches(size_t branchLen, size_t nodeSpaceLen, size_t startLen, size_t nodesInThisLevel, const std::deque<typename NodeType::Ptr>& nodesQueue, std::ostream& out) {
+void PrintBranches(size_t branchLen, size_t nodeSpaceLen, size_t startLen, size_t nodesInThisLevel, const std::deque<typename NodeType::Ptr>& nodesQueue, std::ostream& out)
+{
     auto iter = nodesQueue.begin();
     for (size_t i = 0; i < nodesInThisLevel / 2; i++)
     {
@@ -21,7 +25,8 @@ void printBranches(size_t branchLen, size_t nodeSpaceLen, size_t startLen, size_
 
 // Print the branches and node (eg, ___10___ )
 template <typename NodeType>
-void printNodes(size_t branchLen, size_t nodeSpaceLen, size_t startLen, size_t nodesInThisLevel, const std::deque<typename NodeType::Ptr>& nodesQueue, std::ostream& out) {
+void PrintNodes(size_t branchLen, size_t nodeSpaceLen, size_t startLen, size_t nodesInThisLevel, const std::deque<typename NodeType::Ptr>& nodesQueue, std::ostream& out)
+{
     auto iter = nodesQueue.begin();
     for (size_t i = 0; i < nodesInThisLevel; i++, iter++)
     {
@@ -36,7 +41,8 @@ void printNodes(size_t branchLen, size_t nodeSpaceLen, size_t startLen, size_t n
 
 // Print the leaves only (just for the bottom row)
 template <typename NodeType>
-void printLeaves(size_t indentSpace, size_t level, size_t nodesInThisLevel, const std::deque<typename NodeType::Ptr>& nodesQueue, std::ostream& out) {
+void PrintLeaves(size_t indentSpace, size_t level, size_t nodesInThisLevel, const std::deque<typename NodeType::Ptr>& nodesQueue, std::ostream& out)
+{
     auto iter = nodesQueue.begin();
     for (size_t i = 0; i < nodesInThisLevel; i++, iter++)
     {
@@ -51,8 +57,9 @@ void printLeaves(size_t indentSpace, size_t level, size_t nodesInThisLevel, cons
 // level  Control how wide you want the tree to sparse (eg, level 1 has the minimum space between nodes, while level 2 has a larger space between nodes)
 // indentSpace  Change this to add some indent space to the left (eg, indentSpace of 0 means the lowest level of the left node will stick to the left margin)
 template <typename NodeType>
-void PrintPretty(const typename NodeType::Ptr& root, size_t level, size_t indentSpace, std::ostream& out)
+void PrintPretty(const std::string& title, const typename NodeType::Ptr& root, size_t level, size_t indentSpace, std::ostream& out)
 {
+    out << title << std::endl;
     size_t h = CalculateHeight<NodeType>(root);
     size_t nodesInThisLevel = 1;
 
@@ -64,11 +71,11 @@ void PrintPretty(const typename NodeType::Ptr& root, size_t level, size_t indent
     nodesQueue.push_back(root);
     for (size_t r = 1; r < h; r++)
     {
-        printBranches<NodeType>(branchLen, nodeSpaceLen, startLen, nodesInThisLevel, nodesQueue, out);
+        PrintBranches<NodeType>(branchLen, nodeSpaceLen, startLen, nodesInThisLevel, nodesQueue, out);
         branchLen = branchLen/2 - 1;
         nodeSpaceLen = nodeSpaceLen/2 + 1;
         startLen = branchLen + (3-level) + indentSpace;
-        printNodes<NodeType>(branchLen, nodeSpaceLen, startLen, nodesInThisLevel, nodesQueue, out);
+        PrintNodes<NodeType>(branchLen, nodeSpaceLen, startLen, nodesInThisLevel, nodesQueue, out);
 
         for (size_t i = 0; i < nodesInThisLevel; i++)
         {
@@ -87,6 +94,8 @@ void PrintPretty(const typename NodeType::Ptr& root, size_t level, size_t indent
         }
         nodesInThisLevel *= 2;
     }
-    printBranches<NodeType>(branchLen, nodeSpaceLen, startLen, nodesInThisLevel, nodesQueue, out);
-    printLeaves<NodeType>(indentSpace, level, nodesInThisLevel, nodesQueue, out);
+    PrintBranches<NodeType>(branchLen, nodeSpaceLen, startLen, nodesInThisLevel, nodesQueue, out);
+    PrintLeaves<NodeType>(indentSpace, level, nodesInThisLevel, nodesQueue, out);
+}
+
 }

@@ -5,6 +5,9 @@
 #include <unordered_map>
 #include <utility>
 
+namespace Cache
+{
+
 template<typename KeyType, typename ValueType>
 class LruCache : public ICache<KeyType, ValueType>
 {
@@ -92,3 +95,5 @@ protected:
     PositionContainer_t m_PositionInCache;
 
 };
+
+}

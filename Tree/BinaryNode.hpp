@@ -2,6 +2,9 @@
 
 #include <memory>
 
+namespace Tree
+{
+
 template <typename T>
 struct BinaryNode
 {
@@ -18,3 +21,5 @@ struct BinaryNode
         return Ptr(new BinaryNode(t));
     }
 };
+
+}

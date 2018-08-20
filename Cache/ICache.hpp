@@ -1,5 +1,8 @@
 #pragma once
 
+namespace Cache
+{
+
 template<typename KeyType, typename ValueType>
 class ICache
 {
@@ -12,3 +15,5 @@ public:
 
     virtual size_t size() const = 0;
 };
+
+}

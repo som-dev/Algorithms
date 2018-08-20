@@ -1,39 +1,12 @@
 #pragma once
 
 #include <stack>
-#include <list>
-#include "Reverse.hpp"
 
-template <typename NodeType>
-void ReverseEveryKWithStorage(const typename NodeType::Ptr& head, size_t K, std::list<typename NodeType::Ptr>& nodes)
+namespace LinkedList
 {
-    std::stack<typename NodeType::Ptr> stack;
-    auto node = head;
-    size_t k = K;
-    while (node != nullptr)
-    {
-        stack.push(node);
-        node = node->next;
-        --k;
-        if (k == 0)
-        {
-            k = K;
-            while (!stack.empty())
-            {
-                nodes.push_back(stack.top());
-                stack.pop();
-            }
-        }
-    }
-    while (!stack.empty())
-    {
-        nodes.push_back(stack.top());
-        stack.pop();
-    }
-}
 
 template <typename NodeType>
-void ReverseEveryKWithStorageInPlace(typename NodeType::Ptr& head, size_t K)
+void ReverseEveryKInPlaceWithStorage(typename NodeType::Ptr& head, size_t K)
 {
     std::stack<typename NodeType::Ptr> stack;
     auto currentNode = head;
@@ -85,4 +58,6 @@ typename NodeType::Ptr ReverseEveryKInPlace(typename NodeType::Ptr& head, size_t
         head->next = ReverseEveryKInPlace<NodeType>(currentNode, K);
     }
     return prevNode;
+}
+
 }

@@ -1,24 +1,9 @@
 #pragma once
 
 #include <stack>
-#include <list>
 
-template <typename NodeType>
-void ReverseWithStorage(const typename NodeType::Ptr& head, std::list<typename NodeType::Ptr>& nodes)
+namespace LinkedList
 {
-    std::stack<typename NodeType::Ptr> stack;
-    auto node = head;
-    while (node != nullptr)
-    {
-        stack.push(node);
-        node = node->next;
-    }
-    while (!stack.empty())
-    {
-        nodes.push_back(stack.top());
-        stack.pop();
-    }
-}
 
 template <typename NodeType>
 void ReverseInPlaceWithStorage(typename NodeType::Ptr& head)
@@ -61,4 +46,6 @@ void ReverseInPlace(typename NodeType::Ptr& head)
         current = next;
     }
     head = prev;
+}
+
 }

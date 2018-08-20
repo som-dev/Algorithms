@@ -2,6 +2,9 @@
 
 #include <memory>
 
+namespace LinkedList
+{
+
 template <typename T>
 struct SinglyLinkedNode
 {
@@ -17,3 +20,5 @@ struct SinglyLinkedNode
         return Ptr(new SinglyLinkedNode(t));
     }
 };
+
+}

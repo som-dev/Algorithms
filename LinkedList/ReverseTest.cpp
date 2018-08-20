@@ -3,11 +3,13 @@
 #include "SinglyLinkedNode.hpp"
 #include "Reverse.hpp"
 #include "Print.hpp"
-#include <list>
 
-TEST(Reverse, Test)
+namespace {
+
+using NodeType = LinkedList::SinglyLinkedNode<int>;
+
+NodeType::Ptr CreateList()
 {
-    using NodeType = SinglyLinkedNode<int>;
     auto head                                       = NodeType::Create(20);
     head->next                                      = NodeType::Create(8);
     head->next->next                                = NodeType::Create(4);
@@ -16,24 +18,37 @@ TEST(Reverse, Test)
     head->next->next->next->next->next              = NodeType::Create(14);
     head->next->next->next->next->next->next        = NodeType::Create(22);
     head->next->next->next->next->next->next->next  = NodeType::Create(25);
+    return head;
+}
 
-    Print<NodeType>(head, std::cout);
+void VerifyListReverse(const NodeType::Ptr& head)
+{
+    EXPECT_EQ(head->data,                                           25);
+    EXPECT_EQ(head->next->data,                                     22);
+    EXPECT_EQ(head->next->next->data,                               14);
+    EXPECT_EQ(head->next->next->next->data,                         10);
+    EXPECT_EQ(head->next->next->next->next->data,                   12);
+    EXPECT_EQ(head->next->next->next->next->next->data,             4);
+    EXPECT_EQ(head->next->next->next->next->next->next->data,       8);
+    EXPECT_EQ(head->next->next->next->next->next->next->next->data, 20);
+}
 
-    std::list<typename NodeType::Ptr> nodes;
-    ReverseWithStorage<NodeType>(head, nodes);
-    std::cout << std::endl << "Reverse With Storage: " << std::endl;
-    for (auto node : nodes)
-    {
-        std::cout << node->data << " ";
-    }
-    std::cout << std::endl;
+TEST(LinkedList, ReverseInPlaceWithStorage)
+{
+    auto head = CreateList();
+    LinkedList::Print<NodeType>("Original List: ", head, std::cout);
+    LinkedList::ReverseInPlaceWithStorage<NodeType>(head);
+    LinkedList::Print<NodeType>("Reverse In Place With Storage: ", head, std::cout);
+    VerifyListReverse(head);
+}
 
-    ReverseInPlaceWithStorage<NodeType>(head);
-    std::cout << std::endl << "Reverse In Place With Storage: " << std::endl;
-    Print<NodeType>(head, std::cout);
-
-    ReverseInPlace<NodeType>(head);
-    std::cout << std::endl << "Reverse In Place: " << std::endl;
-    Print<NodeType>(head, std::cout);
+TEST(LinkedList, ReverseInPlace)
+{
+    auto head = CreateList();
+    LinkedList::Print<NodeType>("Original List:", head, std::cout);
+    LinkedList::ReverseInPlace<NodeType>(head);
+    LinkedList::Print<NodeType>("Reverse In Place:", head, std::cout);
+    VerifyListReverse(head);
+}
 
 }

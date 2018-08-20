@@ -2,10 +2,13 @@
 
 #include "LruCache.hpp"
 
-TEST(LruCache, Test)
+namespace
+{
+
+TEST(Cache, LruCache)
 {
     const size_t cacheSize = 3;
-    LruCache<size_t, std::string> lruCache(cacheSize);
+    Cache::LruCache<size_t, std::string> lruCache(cacheSize);
     std::string value;
 
     // cache is empty
@@ -74,4 +77,6 @@ TEST(LruCache, Test)
     EXPECT_EQ(value, "five");
     EXPECT_TRUE(lruCache.get(6, value));
     EXPECT_EQ(value, "six");
+}
+
 }
