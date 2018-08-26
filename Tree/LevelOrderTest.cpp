@@ -25,7 +25,7 @@ NodeType::Ptr CreateTree()
 
 void VerifyLevelOrder(const std::vector<NodeType::Ptr>& nodes)
 {
-    EXPECT_EQ(nodes.size(), 8);
+    ASSERT_EQ(nodes.size(), 8);
     EXPECT_EQ(nodes[0]->data, 20);
     EXPECT_EQ(nodes[1]->data, 8);
     EXPECT_EQ(nodes[2]->data, 22);
@@ -36,7 +36,7 @@ void VerifyLevelOrder(const std::vector<NodeType::Ptr>& nodes)
     EXPECT_EQ(nodes[7]->data, 14);
 }
 
-TEST(Tree, LevelOrderRecursive)
+TEST(LevelOrder, LevelOrderRecursive)
 {
     auto root = CreateTree();
     Tree::PrintPretty<NodeType>("Tree:", root, 1, 0, std::cout);
@@ -46,7 +46,7 @@ TEST(Tree, LevelOrderRecursive)
     VerifyLevelOrder(nodes);
 }
 
-TEST(Tree, LevelOrderIterative)
+TEST(LevelOrder, LevelOrderIterative)
 {
     auto root = CreateTree();
     Tree::PrintPretty<NodeType>("Tree:", root, 1, 0, std::cout);

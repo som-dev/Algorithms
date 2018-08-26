@@ -33,7 +33,7 @@ void VerifyListReverse(const NodeType::Ptr& head)
     EXPECT_EQ(head->next->next->next->next->next->next->next->data, 20);
 }
 
-TEST(LinkedList, ReverseInPlaceWithStorage)
+TEST(Reverse, ReverseInPlaceWithStorage)
 {
     auto head = CreateList();
     LinkedList::Print<NodeType>("Original List: ", head, std::cout);
@@ -42,7 +42,7 @@ TEST(LinkedList, ReverseInPlaceWithStorage)
     VerifyListReverse(head);
 }
 
-TEST(LinkedList, ReverseInPlace)
+TEST(Reverse, ReverseInPlace)
 {
     auto head = CreateList();
     LinkedList::Print<NodeType>("Original List:", head, std::cout);

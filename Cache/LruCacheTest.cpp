@@ -5,7 +5,7 @@
 namespace
 {
 
-TEST(Cache, LruCache)
+TEST(LruCache, EvictLeastRecentlyUsed)
 {
     const size_t cacheSize = 3;
     Cache::LruCache<size_t, std::string> lruCache(cacheSize);

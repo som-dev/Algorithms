@@ -35,7 +35,7 @@ void VerifyMirror(const NodeType::Ptr& root)
     EXPECT_EQ(root->left->left->data,           25);
 }
 
-TEST(Tree, Mirror)
+TEST(Mirror, Mirror)
 {
     auto root = CreateTree();
     Tree::PrintPretty<NodeType>("Original Tree:", root, 1, 0, std::cout);

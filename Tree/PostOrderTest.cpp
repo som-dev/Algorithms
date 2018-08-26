@@ -8,7 +8,7 @@
 namespace
 {
 
-TEST(Tree, PostOrder)
+TEST(PostOrder, PostOrder)
 {
     using NodeType = Tree::BinaryNode<int>;
     auto root                  = NodeType::Create(20);
@@ -26,7 +26,7 @@ TEST(Tree, PostOrder)
     Tree::GetPostOrder<NodeType>(root, nodes);
     Tree::PrintNodes<NodeType>("Post Order:", nodes, std::cout);
 
-    EXPECT_EQ(nodes.size(), 8);
+    ASSERT_EQ(nodes.size(), 8);
     EXPECT_EQ(nodes[0]->data, 4);
     EXPECT_EQ(nodes[1]->data, 10);
     EXPECT_EQ(nodes[2]->data, 14);

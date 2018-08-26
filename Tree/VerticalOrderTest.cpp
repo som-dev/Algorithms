@@ -24,7 +24,7 @@ NodeType::Ptr CreateTree()
 
 void VerifyVertical(const std::vector<NodeType::Ptr>& nodes)
 {
-    EXPECT_EQ(nodes.size(), 8);
+    ASSERT_EQ(nodes.size(), 8);
     EXPECT_EQ(nodes[0]->data, 4);
     EXPECT_EQ(nodes[1]->data, 8);
     EXPECT_EQ(nodes[2]->data, 10);
@@ -35,7 +35,7 @@ void VerifyVertical(const std::vector<NodeType::Ptr>& nodes)
     EXPECT_EQ(nodes[7]->data, 25);
 }
 
-TEST(Tree, VerticalOrder)
+TEST(VerticalOrder, VerticalOrder)
 {
     auto root = CreateTree();
     Tree::PrintPretty<NodeType>("Tree:", root, 1, 0, std::cout);
@@ -46,7 +46,7 @@ TEST(Tree, VerticalOrder)
     VerifyVertical(nodes);
 }
 
-TEST(Tree, VerticalOrder2)
+TEST(VerticalOrder, VerticalOrder2)
 {
     auto root = CreateTree();
     Tree::PrintPretty<NodeType>("Tree:", root, 1, 0, std::cout);

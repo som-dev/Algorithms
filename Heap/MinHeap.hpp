@@ -45,6 +45,11 @@ public:
         return m_items.size();
     }
 
+    bool empty() const
+    {
+        return size() == 0;
+    }
+
 protected:
 
     size_t getParentIndex(size_t index)

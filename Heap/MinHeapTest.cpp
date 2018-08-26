@@ -5,7 +5,7 @@
 namespace
 {
 
-TEST(Heap, MinHeap)
+TEST(MinHeap, Standard)
 {
     Heap::MinHeap<int> minHeap;
 

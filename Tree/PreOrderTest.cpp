@@ -8,7 +8,7 @@
 namespace
 {
 
-TEST(Tree, PreOrder)
+TEST(PreOrder, PreOrder)
 {
     using NodeType = Tree::BinaryNode<int>;
     auto root                  = NodeType::Create(20);
@@ -26,7 +26,7 @@ TEST(Tree, PreOrder)
     Tree::GetPreOrder<NodeType>(root, nodes);
     Tree::PrintNodes<NodeType>("Pre Order:", nodes, std::cout);
 
-    EXPECT_EQ(nodes.size(), 8);
+    ASSERT_EQ(nodes.size(), 8);
     EXPECT_EQ(nodes[0]->data, 20);
     EXPECT_EQ(nodes[1]->data, 8);
     EXPECT_EQ(nodes[2]->data, 4);

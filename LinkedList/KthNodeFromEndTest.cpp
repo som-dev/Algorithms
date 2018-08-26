@@ -21,7 +21,7 @@ NodeType::Ptr CreateList()
     return head;
 }
 
-TEST(LinkedList, KthNodeFromEnd)
+TEST(KthNodeFromEnd, KthNodeFromEnd)
 {
     auto head = CreateList();
     LinkedList::Print<NodeType>("Original List:", head, std::cout);

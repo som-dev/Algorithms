@@ -9,9 +9,12 @@ namespace Tree
 template <typename NodeType>
 bool IsCompleteHelper(const typename NodeType::Ptr& node, size_t index, size_t count)
 {
-    if (node == nullptr) return true;
-    else if (index >= count) return false;
-    else return IsCompleteHelper<NodeType>(node->left, index*2 + 1, count) && IsCompleteHelper<NodeType>(node->right, index*2 + 2, count);
+    if (node == nullptr)
+        return true;
+    else if (index >= count)
+        return false;
+    else
+        return IsCompleteHelper<NodeType>(node->left, index*2 + 1, count) && IsCompleteHelper<NodeType>(node->right, index*2 + 2, count);
 }
 
 template <typename NodeType>
