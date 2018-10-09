@@ -1,11 +1,12 @@
 #pragma once
 
+#include <vector>
 #include "../Heap/MinHeap.hpp"
 
 namespace Sequence
 {
 
-std::vector<int> KLargest(const std::vector<int>& sequence, int K)
+std::vector<int> KLargest(const std::vector<int>& sequence, size_t K)
 {
     std::vector<int> result;
     Heap::MinHeap<int> minHeap;

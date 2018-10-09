@@ -6,6 +6,10 @@ set(CMAKE_CXX_STANDARD 11)
 
 file(GLOB AlgorithmTest_SOURCES "*/*Test.cpp")
 
+if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-long-long -pedantic")
+endif()
+
 ##############################
 # Google Test
 # Based on instructions in https://github.com/google/googletest/tree/master/googletest#incorporating-into-an-existing-cmake-project
