@@ -17,7 +17,7 @@ void GetLeftBoundary(const typename NodeType::Ptr& node, std::vector<typename No
     else if (node->right)
     {
         nodes.push_back(node);
-        GetLeftBoundary<NodeType>(node->left, nodes);
+        GetLeftBoundary<NodeType>(node->right, nodes);
     }
     // else node->left and node->right are nullptr so skip leaf
 }
@@ -53,10 +53,10 @@ void GetLeaves(const typename NodeType::Ptr& node, std::vector<typename NodeType
 
 // combination of algorithms:
 // 1) print root
-// 1) print the left boundary
-// 2) print the leaves from left
-// 3) print the leaves from right
-// 3) print the right boundary (skip root though)
+// 1) print the left boundary (pre-order style)
+// 2) print the leaves from left (in-order style)
+// 3) print the leaves from right (in-order style)
+// 3) print the right boundary (post-order style)
 template <typename NodeType>
 void GetBoundaryOrder(const typename NodeType::Ptr& root, std::vector<typename NodeType::Ptr>& nodes)
 {

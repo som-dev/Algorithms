@@ -25,7 +25,7 @@ Area LargestArea(const std::vector<int>& histogram)
         if (rightmostHigherBarIndex.empty()
             || histogram[rightmostHigherBarIndex.top()] < histogram[i])
         {
-            // bars are increasing, and therefore potential higher areas can be
+            // bars are flat or increasing, and therefore potential higher areas can be
             // calculated so push the bar indexes onto a stack to keep track of them
             rightmostHigherBarIndex.push(i++);
         }
