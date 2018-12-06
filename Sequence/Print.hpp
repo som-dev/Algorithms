@@ -32,4 +32,21 @@ void Print(const std::string& title, const std::vector<T>& vec, std::ostream& ou
     out << std::endl;
 }
 
+template <typename T>
+void Print(const std::string& title, const std::set<T>& set, std::ostream& out)
+{
+    out << title << std::endl;
+    if (set.empty())
+    {
+        out << "Empty";
+    }
+    else
+    {
+        out << "Value: ";
+        for (auto i : set)
+            out << std::setw(2) << i << " ";
+    }
+    out << std::endl;
+}
+
 }
