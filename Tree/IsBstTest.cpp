@@ -4,7 +4,7 @@
 #include "IsBst.hpp"
 #include "PrintPretty.hpp"
 
-TEST(Tree, IsBst)
+TEST(IsBst, Test1)
 {
     using NodeType = Tree::BinaryNode<int>;
     auto root                  = NodeType::Create(20);
