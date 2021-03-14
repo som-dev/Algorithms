@@ -9,7 +9,7 @@ template <typename T>
 struct BinaryNode
 {
     using Ptr = std::shared_ptr<BinaryNode>;
-
+    using DataType = T;
     T data;
     Ptr left;
     Ptr right;
